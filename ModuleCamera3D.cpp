@@ -44,7 +44,6 @@ update_status ModuleCamera3D::Update(float dt)
 	// Now we can make this movememnt frame rate independant!
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_REPEAT)
 		freeMode = !freeMode;
-	//lavaina
 
 	if (freeMode)
 	{
