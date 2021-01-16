@@ -8,8 +8,6 @@
 
 struct PhysBody3D;
 struct PhysMotor3D;
-struct PhysSensor3D;
-enum SensorType;
 
 class ModuleSceneIntro : public Module
 {
@@ -23,8 +21,7 @@ public:
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 	PhysBody3D* CreateRectangle(vec3, vec4, vec3, Color, float mass = 0.f);
-	void CreateSensor(vec3, vec4, vec3, Color, SensorType, vec3, vec4 target_rotation = { 0, 0, 0, 1 });
-
+	
 	void FirstPhaseObjects();
 
 public:
@@ -49,9 +46,5 @@ public:
 	PhysMotor3D* right_wheel;
 
 	p2List<Primitive*> map_objects;
-	p2List<PhysSensor3D*> map_sensors;
-	PhysSensor3D* checkPoints[3];
-
-	int checkpointCounter;
 
 };
