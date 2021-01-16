@@ -114,12 +114,8 @@ update_status ModuleCamera3D::Update(float dt)
 		vec3 vehicleVec3 = { vehicleVec.getX(), vehicleVec.getY(), vehicleVec.getZ() };
 
 		Position = vehiclePosition + offset + vehicleVec3;
-		LookAt(vehiclePosition);
 
-		//float lerp = 1.0f;
-		/*Position.x = (carPos.x - Position.x) * lerp * dt;
-		Position.z = (carPos.z - Position.z) * lerp * dt;
-		Position.y = carPos.y + offset.y;*/
+		LookAt(vehiclePosition);
 	}
 	// Recalculate matrix -------------
 	CalculateViewMatrix();
