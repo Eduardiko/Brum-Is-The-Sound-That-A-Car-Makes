@@ -25,7 +25,7 @@ void PhysVehicle3D::Render()
 {
 	Cylinder wheel;
 
-	wheel.color = Black;
+	wheel.color = White;
 
 	for(int i = 0; i < vehicle->getNumWheels(); ++i)
 	{
@@ -39,6 +39,7 @@ void PhysVehicle3D::Render()
 	}
 
 	//Main Car Body
+
 	CreateCube(vec3(info.chassis_size.x, info.chassis_size.y, info.chassis_size.z), { info.chassis_offset.x, info.chassis_offset.y, info.chassis_offset.z }, Red).Render();
 	
 }

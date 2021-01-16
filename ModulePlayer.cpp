@@ -21,24 +21,23 @@ bool ModulePlayer::Start()
 	VehicleInfo car;
 
 	// Car properties ----------------------------------------
-	car.chassis_size.Set(2, 2, 4);
+	car.chassis_size.Set(2, 1, 4);
 	car.chassis_offset.Set(0, 1.5, 0);
 	car.mass = 500.0f;
-	car.suspensionStiffness = 15.88f;
+	car.suspensionStiffness = 10.0f;
 	car.suspensionCompression = 0.83f;
-	car.suspensionDamping = 0.88f;
-	car.maxSuspensionTravelCm = 1000.0f;
-	car.frictionSlip = 50.5;
+	car.suspensionDamping = 1.0f;
+	car.maxSuspensionTravelCm = 500.0f;
+	car.frictionSlip = 10.0f;
 	car.maxSuspensionForce = 6000.0f;
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 1.2f;
 	float wheel_radius = 0.6f;
-	float wheel_width = 0.5f;
+	float wheel_width = 0.1f;
 	float suspensionRestLength = 1.2f;
 
 	// Don't change anything below this line ------------------
-
 	float half_width = car.chassis_size.x*0.5f;
 	float half_length = car.chassis_size.z*0.5f;
 	
@@ -146,7 +145,12 @@ update_status ModulePlayer::Update(float dt)
 		}
 	}
 
+	if (vehicle->GetKmh() > 80.0) acceleration = -MAX_ACCELERATION;
+	if (vehicle->GetKmh() < -80.0) acceleration = MAX_ACCELERATION;
+
 	vehicle->ApplyEngineForce(acceleration);
+
+
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
 
