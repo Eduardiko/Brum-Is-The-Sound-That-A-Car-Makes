@@ -43,11 +43,7 @@ public:
 
 public:
 
-	int winSound;
-	int boostSound;
-	int yaaySound;
-	int deathSound;
-	int sensorSound;
+	
 
 	p2List<Primitive*> map_objects;
 	p2List<PhysSensor3D*> map_sensors;

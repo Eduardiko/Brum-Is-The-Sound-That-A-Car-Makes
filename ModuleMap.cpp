@@ -22,10 +22,7 @@ bool ModuleMap::Start()
 	
 
 	//Audio Load
-	winSound = App->audio->LoadFx("sfx/WinSoundEffect.wav");
 	
-	App->audio->PlayMusic("music/DejaVu.ogg");
-
 	//Create map
 	/*FirstPhaseObjects();
 	SecondPhaseObjects();

@@ -44,6 +44,22 @@ bool ModuleAudio::Init()
 	return ret;
 }
 
+bool ModuleAudio::Start()
+{
+	LOG("Loadinf music and Fx");
+	bool ret = true;
+
+	
+
+	respawnSoundFx = App->audio->LoadFx("sfx/respawnFx.wav");
+
+	App->audio->PlayMusic("music/song.ogg");
+
+
+	return ret;
+}
+
+
 // Called before quitting
 bool ModuleAudio::CleanUp()
 {

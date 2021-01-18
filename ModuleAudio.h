@@ -13,6 +13,8 @@ public:
 	ModuleAudio(Application* app, bool start_enabled = true);
 	~ModuleAudio();
 
+
+	bool Start();
 	bool Init();
 	bool CleanUp();
 
@@ -29,6 +31,16 @@ private:
 
 	Mix_Music*			music;
 	p2List<Mix_Chunk*>	fx;
+
+public:
+
+	int winSoundFx;
+	int boostSound;
+	int yaaySound;
+	int deadSoundFx;
+	int sensorSound;
+	int respawnSoundFx;
+
 };
 
 #endif // __ModuleAudio_H__
