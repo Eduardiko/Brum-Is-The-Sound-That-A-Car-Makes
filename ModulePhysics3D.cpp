@@ -128,9 +128,9 @@ update_status ModulePhysics3D::Update(float dt)
 		App->player->vehicle->SetPos(0, 5, 10);*/
 
 		
-		//App->player->vehicle->SetPos(0,5,10);
+		App->player->vehicle->SetPos(0,5,10);
 		//App->player->vehicle->direc
-		App->player->Start();
+		//App->player->Start();
 
 		App->audio->PlayFx(App->audio->respawnSoundFx);
 	}
