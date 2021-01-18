@@ -97,7 +97,7 @@ void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color s_co
 {
 	/*Cube* object = new Cube();
 
-	object->SetPos(position.x, position.y, position.z);
+	object->SetPos(position.x, position.y,.z);
 	object->size = size;
 	object->color = s_color;
 	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });

@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModulePhysics3D.h"
+#include "ModulePlayer.h"
 #include "PhysBody3D.h"
 #include "PhysVehicle3D.h"
 #include "Primitive.h"
@@ -114,6 +115,22 @@ update_status ModulePhysics3D::Update(float dt)
 {
 	if(App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 		debug = !debug;
+
+	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	{
+		//Respawn
+		LOG("Respawning vehicle");
+		/*App->camera->Position = 0;
+
+		App->player->turn = 0;
+
+		App->player->vehicle->Turn(0);
+		App->player->vehicle->SetPos(0, 5, 10);*/
+
+		App->player->~ModulePlayer();
+		//App->player->vehicle->SetPos(0,5,10);
+		//App->player->Start();
+	}
 
 	if(debug == true)
 	{
