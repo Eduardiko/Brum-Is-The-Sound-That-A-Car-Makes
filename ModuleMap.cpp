@@ -138,10 +138,12 @@ void ModuleMap::LastPhaseObjects()
 
 void ModuleMap::CreateSensors()
 {
-	
+	//Here we add all sensors:
+	CreateSensor({ -50,1,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, Green, SensorType::BOOSTER, { 0,10,0 });
 
 	
-
+	//Winning condition
+	CreateSensor({ 30, 28, 148 }, { -45,1,0,0 }, { 8, 1, 8 }, White, SensorType::FINISH, { 0,0,0 });
 }
 
 void ModuleMap::CreateConstrains()
