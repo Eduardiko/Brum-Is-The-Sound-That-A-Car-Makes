@@ -37,7 +37,7 @@ Thumbs.db
 *.obj
 *.pdb
 *.aps
-*.user
+# *.user
 # *.vcproj
 # *.vcxproj*
 # *.sln
