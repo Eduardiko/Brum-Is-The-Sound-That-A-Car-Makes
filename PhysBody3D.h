@@ -14,7 +14,8 @@ enum SensorType {
 	FINISH,
 	START,
 	CHECKPOINT,
-	RESPAWN
+	RESPAWN,
+	COIN
 };
 
 // =================================================

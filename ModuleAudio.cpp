@@ -51,8 +51,10 @@ bool ModuleAudio::Start()
 
 	
 
-	respawnSoundFx = App->audio->LoadFx("fx/respawnFx.wav");
+	respawnSoundFx = App->audio->LoadFx("rfx/HonkFx.wav");
+	winSoundFx = App->audio->LoadFx("rfx/WinFx.wav");
 
+	//Loop it
 	App->audio->PlayMusic("music/song.ogg");
 
 
