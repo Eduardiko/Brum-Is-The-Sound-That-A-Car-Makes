@@ -113,7 +113,13 @@ update_status ModuleCamera3D::Update(float dt)
 		btVector3 vehicleVec = { vehicleToLook->vehicle->getForwardVector().getX() * -10, 0, vehicleToLook->vehicle->getForwardVector().getZ() * -10 };
 		vec3 vehicleVec3 = { vehicleVec.getX(), vehicleVec.getY(), vehicleVec.getZ() };
 
-		Position = vehiclePosition + offset + vehicleVec3;
+		float lerp = 500.0f;
+
+		vec3 distanceToCar = vehiclePosition + offset + vehicleVec3 - Position;
+
+		Position.x += distanceToCar.x * dt * 3;
+		Position.y = vehiclePosition.y + offset.y + vehicleVec3.y;
+		Position.z += distanceToCar.z * dt * 3;
 
 		LookAt(vehiclePosition);
 	}
