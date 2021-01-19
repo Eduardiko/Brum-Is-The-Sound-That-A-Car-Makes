@@ -31,6 +31,8 @@ bool ModuleMap::Start()
 	CreateSensors();
 	CreateConstrains();*/
 
+	CreateSensors();
+
 	return ret;
 }
 
@@ -92,22 +94,22 @@ PhysBody3D* ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius
 
 void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color s_color, SensorType s_type, vec3 mod, vec4 target_rotation)
 {
-	/*Cube* object = new Cube();
+	Cube* object = new Cube();
 
-	object->SetPos(position.x, position.y,.z);
+	object->SetPos(position.x, position.y,position.z);
 	object->size = size;
 	object->color = s_color;
 	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
 
-	if (s_type == SensorType::CHECKPOINT) 
+	/*if (s_type == SensorType::CHECKPOINT) 
 	{
 		checkPoints[checkpointCounter] = map_sensors.add(App->physics->AddSensor(*object, mod, s_type, target_rotation))->data;
 		checkpointCounter++;
-	}
-	else
-	{
-		map_sensors.add(App->physics->AddSensor(*object, mod, s_type, target_rotation));
 	}*/
+	//else
+	
+		//map_sensors.add(App->physics->AddSensor(*object, mod, s_type, target_rotation));
+	
 }
 
 void ModuleMap::FirstPhaseObjects()

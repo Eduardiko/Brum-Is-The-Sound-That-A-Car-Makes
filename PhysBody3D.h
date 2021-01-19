@@ -9,7 +9,7 @@ class btRigidBody;
 class Module;
 
 enum SensorType {
-
+	
 	BOOSTER,
 	FINISH,
 	START,
@@ -17,6 +17,7 @@ enum SensorType {
 	RESPAWN,
 	COIN
 };
+
 
 // =================================================
 struct PhysBody3D

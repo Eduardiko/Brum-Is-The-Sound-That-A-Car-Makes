@@ -470,7 +470,7 @@ void ModulePhysics3D::SetGravity(const vec3 v)
 //	PhysSensor3D* pbody = new PhysSensor3D(body, s_type);
 //	pbody->gravityMod = gravityMod;
 //	pbody->targetRot = tarRot;
-//	pbody->SetAsSensor(true);
+//	//pbody->SetAsSensor(true);
 //
 //	body->setUserPointer(pbody);
 //	world->addRigidBody(body);
