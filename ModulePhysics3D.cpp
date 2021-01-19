@@ -160,6 +160,12 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 			App->player->RespawnCar();
 		}
 
+		if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+		{
+			//Respawn
+			App->player->FinishGame();
+		}
+
 		if (debug == true)
 		{
 			world->debugDrawWorld();

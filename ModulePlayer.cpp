@@ -137,6 +137,12 @@ update_status ModulePlayer::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
+		if (vehicle->GetKmh() > 30)
+		{
+			App->audio->PlayFx(App->audio->brakeSoundFx);
+		}
+		
+
 		if (roundf(vehicle->GetKmh()) <= 0)
 		{
 			acceleration = -MAX_ACCELERATION;
@@ -172,6 +178,31 @@ void ModulePlayer::FinishGame()
 		App->audio->StopMusic(0.f);
 		App->audio->PlayFx(App->audio->winSoundFx);
 		gameHasFinished = true;
+	}
+
+	if (gameHasFinished)
+	{
+		
+
+		//restart_timer -= dt;
+		btVector3 cameraLerp = { App->camera->Position.x, App->camera->Position.y, App->camera->Position.z };
+
+		vec3 a = { App->player->vehicle->vehicle->getRigidBody()->getCenterOfMassPosition().getX(),
+			App->player->vehicle->vehicle->getRigidBody()->getCenterOfMassPosition().getY(),
+			App->player->vehicle->vehicle->getRigidBody()->getCenterOfMassPosition().getZ() };
+
+		cameraLerp = lerp(cameraLerp, { 100, 100, 0 }, 0.01f);
+		App->camera->LookAt(a);
+		App->camera->Position = { cameraLerp.getX(), cameraLerp.getY(), cameraLerp.getZ() };
+
+		/*if (restart_timer <= 0.f)
+		{
+			RespawnCar();
+			App->audio->PlayMusic("music/DejaVu.ogg");
+			App->camera->followCar = true;
+			restart_timer = 5.f;
+			game_finished = false;
+		}*/
 	}
 }
 

@@ -42,6 +42,7 @@ public:
 	int sensorSound;
 	int respawnSoundFx;
 	int honkSoundFx;
+	int brakeSoundFx;
 
 };
 

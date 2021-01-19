@@ -53,6 +53,7 @@ bool ModuleAudio::Start()
 
 	respawnSoundFx = App->audio->LoadFx("fx/RespawnFx.wav");
 	honkSoundFx = App->audio->LoadFx("fx/HonkFx.wav");
+	brakeSoundFx = App->audio->LoadFx("fx/BrakeFx.wav");
 	winSoundFx = App->audio->LoadFx("fx/WinFx.wav");
 
 	//Loop it
