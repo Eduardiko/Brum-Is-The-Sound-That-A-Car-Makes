@@ -177,6 +177,9 @@ void ModulePlayer::FinishGame()
 
 void ModulePlayer::RespawnCar()
 {
+	LOG("Respawning vehicle");
+	App->audio->PlayFx(App->audio->respawnSoundFx);
+
 	App->physics->SetGravity({ GRAVITY.getX(), GRAVITY.getY(), GRAVITY.getZ() });
 	mat4x4 carMatrix;
 	vehicle->GetTransform(&carMatrix);

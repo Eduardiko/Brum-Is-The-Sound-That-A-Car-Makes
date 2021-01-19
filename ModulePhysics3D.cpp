@@ -157,21 +157,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 		if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		{
 			//Respawn
-			LOG("Respawning vehicle");
-			/*App->camera->Position = 0;
-
-			App->player->turn = 0;
-
-			App->player->vehicle->Turn(0);
-			App->player->vehicle->SetPos(0, 5, 10);*/
-
-
-			App->player->vehicle->SetPos(0, 5, 10);
-			//App->player->vehicle->direc
-			//App->player->Start();
-
-
-			App->audio->PlayFx(App->audio->respawnSoundFx);
+			App->player->RespawnCar();
 		}
 
 		if (debug == true)
