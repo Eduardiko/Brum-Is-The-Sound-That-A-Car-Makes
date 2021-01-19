@@ -95,8 +95,10 @@ bool ModulePlayer::Start()
 	car.wheels[3].brake = true;
 	car.wheels[3].steering = false;
 
+	car.spawnPosition = { 0, 12, 10 };
+
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 12, 10);
+	vehicle->SetPos(car.spawnPosition.x , car.spawnPosition.y, car.spawnPosition.z);
 	
 	App->camera->vehicleToLook = vehicle;
 
@@ -161,6 +163,47 @@ update_status ModulePlayer::Update(float dt)
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
+}
+
+void ModulePlayer::FinishGame()
+{
+	if (!gameHasFinished)
+	{
+		App->audio->StopMusic(0.f);
+		App->audio->PlayFx(App->audio->winSoundFx);
+		gameHasFinished = true;
+	}
+}
+
+void ModulePlayer::RespawnCar()
+{
+	App->physics->SetGravity({ GRAVITY.getX(), GRAVITY.getY(), GRAVITY.getZ() });
+	mat4x4 carMatrix;
+	vehicle->GetTransform(&carMatrix);
+
+	//Correct position and rotation
+	carMatrix.rotate(0, { 0, 1, 0 });
+	carMatrix.translate(vehicle->info.spawnPosition.x, vehicle->info.spawnPosition.y, vehicle->info.spawnPosition.z);
+
+	//Set corrected transform
+	vehicle->SetTransform(&carMatrix.M[0]);
+
+	//Correct velocity (set to 0)
+	vehicle->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+
+	vehicle->rotating = false;
+	vehicle->currentAngle = 0;
+	//App->camera->cameraOffset = vec3(0.f, 4.f, 0.f);
+	//App->player->speed_bost = false;
+	//lastCheckPoint = nullptr;
+
+	p2List_item<PhysSensor3D*>* item = App->map->map_sensors.getFirst();
+	while (item)
+	{
+		item->data->isEnabled = true;
+		item = item->next;
+	}
 }
 
 

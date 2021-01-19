@@ -76,88 +76,127 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 	world->stepSimulation(dt, 15);
 
 	int numManifolds = world->getDispatcher()->getNumManifolds();
-	for(int i = 0; i<numManifolds; i++)
+	for (int i = 0; i < numManifolds; i++)
 	{
 		btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
 		btCollisionObject* obA = (btCollisionObject*)(contactManifold->getBody0());
 		btCollisionObject* obB = (btCollisionObject*)(contactManifold->getBody1());
 
 		int numContacts = contactManifold->getNumContacts();
-		if(numContacts > 0)
+		if (numContacts > 0)
 		{
 			PhysBody3D* pbodyA = (PhysBody3D*)obA->getUserPointer();
 			PhysBody3D* pbodyB = (PhysBody3D*)obB->getUserPointer();
 
-			if(pbodyA && pbodyB)
+			if ((pbodyA && pbodyA->IsSensor()) || (pbodyB && pbodyB->IsSensor()))
 			{
-				p2List_item<Module*>* item = pbodyA->collision_listeners.getFirst();
-				while(item)
+
+				PhysSensor3D* sensor = nullptr;
+				if (pbodyA && pbodyA->IsSensor())
 				{
-					item->data->OnCollision(pbodyA, pbodyB);
-					item = item->next;
+					sensor = (PhysSensor3D*)pbodyA;
+				}
+				else if (pbodyB && pbodyB->IsSensor())
+				{
+					sensor = (PhysSensor3D*)pbodyB;
 				}
 
-				item = pbodyB->collision_listeners.getFirst();
-				while(item)
+				if (sensor && sensor->isEnabled)
 				{
-					item->data->OnCollision(pbodyB, pbodyA);
-					item = item->next;
+					switch (sensor->type)
+					{
+
+
+
+					case SensorType::BOOSTER:
+						//App->player->speed_bost = true;
+						//App->audio->PlayFx(App->map->boostSound);
+						break;
+
+
+					case SensorType::FINISH:
+						App->player->FinishGame();
+						break;
+
+					}
+
 				}
 			}
-		}
-	}
+			else
+			{
+				if (pbodyA && pbodyB)
+				{
+					p2List_item<Module*>* item = pbodyA->collision_listeners.getFirst();
+					while (item)
+					{
+						item->data->OnCollision(pbodyA, pbodyB);
+						item = item->next;
+					}
 
-	return UPDATE_CONTINUE;
+					item = pbodyB->collision_listeners.getFirst();
+					while (item)
+					{
+						item->data->OnCollision(pbodyB, pbodyA);
+						item = item->next;
+					}
+				}
+			}
+
+		}
+
+		return UPDATE_CONTINUE;
+	}
 }
 
 // ---------------------------------------------------------
-update_status ModulePhysics3D::Update(float dt)
-{
-	if(App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-		debug = !debug;
-
-	if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	update_status ModulePhysics3D::Update(float dt)
 	{
-		//Respawn
-		LOG("Respawning vehicle");
-		/*App->camera->Position = 0;
+		if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+			debug = !debug;
 
-		App->player->turn = 0;
-
-		App->player->vehicle->Turn(0);
-		App->player->vehicle->SetPos(0, 5, 10);*/
-
-		
-		App->player->vehicle->SetPos(0,5,10);
-		//App->player->vehicle->direc
-		//App->player->Start();
-
-		App->audio->PlayFx(App->audio->respawnSoundFx);
-	}
-
-	if(debug == true)
-	{
-		world->debugDrawWorld();
-
-		// Render vehicles
-		p2List_item<PhysVehicle3D*>* item = vehicles.getFirst();
-		while(item)
+		if (App->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		{
-			item->data->Render();
-			item = item->next;
+			//Respawn
+			LOG("Respawning vehicle");
+			/*App->camera->Position = 0;
+
+			App->player->turn = 0;
+
+			App->player->vehicle->Turn(0);
+			App->player->vehicle->SetPos(0, 5, 10);*/
+
+
+			App->player->vehicle->SetPos(0, 5, 10);
+			//App->player->vehicle->direc
+			//App->player->Start();
+
+
+			App->audio->PlayFx(App->audio->respawnSoundFx);
 		}
 
-		if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+		if (debug == true)
 		{
-			Sphere s(1);
-			s.SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
-			float force = 30.0f;
-			AddBody(s)->Push(-(App->camera->Z.x * force), -(App->camera->Z.y * force), -(App->camera->Z.z * force));
-		}
-	}
+			world->debugDrawWorld();
 
-	return UPDATE_CONTINUE;
-}
+			// Render vehicles
+			p2List_item<PhysVehicle3D*>* item = vehicles.getFirst();
+			while (item)
+			{
+				item->data->Render();
+				item = item->next;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+			{
+				Sphere s(1);
+				s.SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
+				float force = 30.0f;
+				AddBody(s)->Push(-(App->camera->Z.x * force), -(App->camera->Z.y * force), -(App->camera->Z.z * force));
+			}
+		}
+
+		return UPDATE_CONTINUE;
+	}
 
 // ---------------------------------------------------------
 update_status ModulePhysics3D::PostUpdate(float dt)
@@ -416,6 +455,10 @@ int	 DebugDrawer::getDebugMode() const
 	return mode;
 }
 
+void ModulePhysics3D::SetGravity(const vec3 v)
+{
+	world->setGravity({ v.x, v.y, v.z });
+}
 
 //PhysSensor3D* ModulePhysics3D::AddSensor(const Cube& cube, const vec3 gravityMod, const SensorType s_type, vec4 tarRot)
 //{

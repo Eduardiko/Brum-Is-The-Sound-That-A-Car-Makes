@@ -51,8 +51,9 @@ bool ModuleAudio::Start()
 
 	
 
-	respawnSoundFx = App->audio->LoadFx("rfx/HonkFx.wav");
-	winSoundFx = App->audio->LoadFx("rfx/WinFx.wav");
+	respawnSoundFx = App->audio->LoadFx("fx/RespawnFx.wav");
+	honkSoundFx = App->audio->LoadFx("fx/HonkFx.wav");
+	winSoundFx = App->audio->LoadFx("fx/WinFx.wav");
 
 	//Loop it
 	App->audio->PlayMusic("music/song.ogg");
@@ -171,4 +172,23 @@ bool ModuleAudio::PlayFx(unsigned int id, int repeat)
 	}
 
 	return ret;
+}
+
+void ModuleAudio::StopMusic(float fade_time)
+{
+	if (music != NULL)
+	{
+		if (fade_time > 0.0f)
+		{
+			Mix_FadeOutMusic((int)(fade_time * 1000.0f));
+		}
+		else
+		{
+			Mix_HaltMusic();
+		}
+
+		// this call blocks until fade out is done
+		Mix_FreeMusic(music);
+		music = NULL;
+	}
 }

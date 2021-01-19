@@ -19,6 +19,9 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 
+	void FinishGame();
+	void RespawnCar();
+
 public:
 
 	PhysVehicle3D* vehicle;
@@ -26,4 +29,6 @@ public:
 	float turn;
 	float acceleration;
 	float brake;
+
+	bool gameHasFinished = false;
 };
