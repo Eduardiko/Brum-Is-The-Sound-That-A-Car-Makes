@@ -103,6 +103,7 @@ update_status ModuleCamera3D::Update(float dt)
 			Position = Reference + Z * length(Position);
 		}
 	}
+
 	else
 	{
 		vehicleToLook->GetTransform(&pointToLook);

@@ -176,7 +176,7 @@ void ModulePlayer::FinishGame()
 	if (!gameHasFinished)
 	{
 		App->audio->StopMusic(0.f);
-		App->audio->PlayFx(App->audio->winSoundFx);
+		App->audio->PlayFx(App->audio->winSoundFx);	
 		gameHasFinished = true;
 	}
 

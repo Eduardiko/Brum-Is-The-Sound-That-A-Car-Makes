@@ -140,7 +140,7 @@ void ModuleMap::CreateSensors()
 
 	
 	//Winning condition
-	CreateSensor({ 30, 28, 148 }, { -45,1,0,0 }, { 8, 1, 8 }, White, SensorType::FINISH, { 0,0,0 });
+	CreateSensor({ 0,0,0 }, { -45,1,0,0 }, { 8, 8, 8 }, White, SensorType::FINISH, { 0,0,0 });
 }
 
 void ModuleMap::CreateConstrains()
