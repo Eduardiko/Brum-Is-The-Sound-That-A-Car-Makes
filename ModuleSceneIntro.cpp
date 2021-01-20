@@ -71,55 +71,76 @@ PhysBody3D* ModuleSceneIntro::CreateRectangle(vec3 position, vec4 rotation, vec3
 void ModuleSceneIntro::FirstPhaseObjects()
 {
 
+	//WALL BACK---------------------------------------------------
 	CreateRectangle({ 7,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
 	CreateRectangle({ 3,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
 	CreateRectangle({ -1,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
 	CreateRectangle({ -5,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
+	//WALL LEFT----------------------------------------------------
+	CreateRectangle({ 7,1,57 }, { 0,0,0,1 }, { 1,3.f,100 }, Black);
+	//WALL RIGHT-----------------------------------------------------
+	CreateRectangle({ -7,1,57 }, { 0,0,0,1 }, { 1,3.f,100 }, Black);
+	//--------------------------------------------------------------
+	//WALL HIGH LEFT----------------------------------------------------
+	CreateRectangle({ 7,5,60 }, { 0,0,0,1 }, { 1,3.f,70 }, Black);
+	//WALL HIGH RIGHT----------------------------------------------------
+	CreateRectangle({ -7,5,60 }, { 0,0,0,1 }, { 1,3.f,70 }, Black);
+	//---------------------------------------------------------------------
+	CreateRectangle({ 4,1,108 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ 6,1,114 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ 8,1,120 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ 10,1,126 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ 10,1,132 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ 9,1,137 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ 7,1,141 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ 5,1,145 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ 4,1,147 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ 1,1,149 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -1,1,149 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -3,1,149 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -7,1,149 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -11,1,149 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -15,1,149 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -18,1,147 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -20,1,143 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -22,1,139 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -24,1,135 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -25,1,129 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -24,1,123 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -22,1,117 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -20,1,111 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -18,1,105 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	//OBSTACLES ON THE RECT
 
-	CreateRectangle({ 7,1,3 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 7,1,9 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 7,1,15 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 6,1,21 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 4,1,27 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 3,1,33 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 3,5,39 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 3,5,45 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ 3,6,51 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 3,6,57 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ 3,6,63 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 3,6,69 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ 3,6,75 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 3,6,81 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ 3,6,87 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 3,1,93 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 3,1,99 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ 3,1,105 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 4,1,108 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 6,1,114 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ 8,1,120 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 10,1,126 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ 10,1,132 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 9,1,137 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ 7,1,141 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ 5,1,145 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ 4,1,147 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ 1,1,149 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -1,1,149 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,1,149 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -7,1,149 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -11,1,149 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -15,1,149 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -18,1,147 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -20,1,143 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -22,1,139 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -24,1,135 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -25,1,129 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -24,1,123 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -22,1,117 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -20,1,111 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -18,1,105 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -16,1,99 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -18,1,95 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ -16,1,99 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -10,1,99 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	//MIDDLE OBSTACLE
+	CreateRectangle({ -13,1,80 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	//SIDES OBSTACLES 
+	CreateRectangle({ -16,1,60 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -10,1,60 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	//MIDDLE OBSTACLE
+	CreateRectangle({ -13,1,40 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+
+	//RAMPAS 2nd----------------------------------------------------------------
+	CreateRectangle({ -15, 1, 32 }, { -70, 1, 0, 0 }, { 5, 15, 0.3f }, Red);
+	CreateRectangle({ -10, 1, 32 }, { -70, 1, 0, 0 }, { 5, 15, 0.3f }, Red);
+	//----------------------------------------------------------------------
+
+	//1nd PLATFORM
+	CreateRectangle({ -13, 6.5, -15 }, { 90, 1, 0, 0 }, { 20, 20, 0.3f }, Red);
+	//2rd PLATFORM
+	CreateRectangle({ -13, 4.5, -35 }, { 90, 1, 0, 0 }, { 20, 20, 0.3f }, Red);
+	//3th PLATFORM
+	CreateRectangle({ -13, 2.5, -65 }, { 90, 1, 0, 0 }, { 20, 40, 0.3f }, Red);
+	//4th PLATFORM
+	CreateRectangle({ 2, 2.5, -65 }, { 90, 1, 0, 0 }, { 20, 40, 0.3f }, Red);
+	//5th PLATFORM
+	CreateRectangle({ 0, 2.5, -25 }, { 90, 1, 0, 0 }, { 20, 40, 0.3f }, Red);
+
+	//CreateRectangle({ -18,1,95 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	//--------------CURVA COMMENTED------------------------------
+	/*
 	CreateRectangle({ -22,1,95 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
 	CreateRectangle({ -25,1,97 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
 	CreateRectangle({ -25,1,102 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
@@ -135,50 +156,29 @@ void ModuleSceneIntro::FirstPhaseObjects()
 	CreateRectangle({ -53,1,144 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
 	CreateRectangle({ -59,1,144 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
 	CreateRectangle({ -65,1,144 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -71,1,144 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -7,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -7,1,6 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -7,1,12 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -7,1,18 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -5,1,24 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,1,30 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,1,36 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,5,39 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,5,45 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -3,5,51 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,5,57 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -3,5,63 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,5,69 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -3,6,51 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,6,54 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -3,6,57 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,6,60 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -3,6,63 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,6,66 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -3,6,69 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,6,72 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -3,6,75 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,6,78 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -3,6,81 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,6,84 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -3,6,87 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,6,90 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -3,1,93 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,1,96 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -3,1,99 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,1,102 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -3,1,105 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -4,1,108 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -6,1,114 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -5,1,120 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -3,1,126 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -3,1,132 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -6,1,136 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -10,1,136 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -12,1,132 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -11,1,126 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-	CreateRectangle({ -9,1,120 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -4,1,93 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
+	CreateRectangle({ -71,1,144 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);*/
+	//
+
+	CreateRectangle({ -6,1,114 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -5,1,120 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -3,1,126 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -3,1,132 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -6,1,136 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	//
+	CreateRectangle({ -10,1,136 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -18,1,70 }, { 0,0,0,1 }, { 1,3.f,70 }, Blue);
+	//SECOND LAP
+	CreateRectangle({ -18,1,10 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -18,1,15 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -18,1,20 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -18,1,25 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -18,1,30 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+
+	//-------------------------------------------------------------
+	CreateRectangle({ -11,1,126 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	CreateRectangle({ -9,1,120 }, { 0,0,0,1 }, { 1,3.f,1 }, Blue);
+	//
+	/*CreateRectangle({ -4,1,93 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
 	CreateRectangle({ -6,1,89 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
 	CreateRectangle({ -8,1,85 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
 	CreateRectangle({ -11,1,83 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
@@ -203,13 +203,14 @@ void ModuleSceneIntro::FirstPhaseObjects()
 	CreateRectangle({ -59,1,130 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
 	CreateRectangle({ -65,1,130 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
 	CreateRectangle({ -71,1,130 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
-	CreateRectangle({ -77,1,130 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);
-
-	CreateRectangle({ 0, 1, 30 }, { 70, 1, 0, 0 }, { 5, 15, 0.2f }, Red);
+	CreateRectangle({ -77,1,130 }, { 0,0,0,1 }, { 1,3.f,1 }, Black);*/
+	//RAMPAS 1st----------------------------------------------------------------
+	CreateRectangle({ 5, 1, 30 }, { 70, 1, 0, 0 }, { 5, 15, 0.3f }, Red);
+	CreateRectangle({ 0, 1, 30 }, { 70, 1, 0, 0 }, { 5, 15, 0.3f }, Red);
+	CreateRectangle({ -5, 1, 30 }, { 70, 1, 0, 0 }, { 5, 15, 0.3f }, Red);
+	//--------------------------------------------------------------------------
 	CreateRectangle({ 0, 1, 49 }, { 0, 1, 0, 0 }, { 5, 5, 8.f }, Black);
 	CreateRectangle({ 0, 4, 60 }, { 80, 1, 0, 0 }, { 5, 15, 0.2f }, Black);
 	CreateRectangle({ 0, 2, 82 }, { -85, 1, 0, 0 }, { 5, 42, 0.2f }, Black);
-
-	CreateRectangle({ -90,6,137 }, { -30,0,0,1 }, { 30,0.2f,14 }, Red);
 
 }
