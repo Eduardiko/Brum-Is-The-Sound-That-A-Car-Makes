@@ -9,7 +9,7 @@ class btRigidBody;
 class Module;
 
 enum SensorType {
-	
+
 	BOOSTER,
 	FINISH,
 	START,
@@ -32,6 +32,7 @@ public:
 	void SetTransform(const float* matrix) const;
 	void SetPos(float x, float y, float z);
 	bool IsSensor();
+	void SetAsSensor(bool isSensor);
 
 	btRigidBody* body = nullptr;
 	bool isSensor;

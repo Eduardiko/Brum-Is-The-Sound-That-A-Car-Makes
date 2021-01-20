@@ -21,6 +21,8 @@ public:
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 	PhysBody3D* CreateRectangle(vec3, vec4, vec3, Color, float mass = 0.f);
+	void CreateSensors();
+	void CreateSensor(PhysBody3D*obj ,vec3 pos,vec3 size,const SensorType type);
 	
 	void FirstPhaseObjects();
 
@@ -47,4 +49,10 @@ public:
 
 	p2List<Primitive*> map_objects;
 
+	//List of sensors
+	PhysBody3D* finishLine;
+
+	//Sensors
+	PhysBody3D* finish_line;
+	Cube c_finish;
 };

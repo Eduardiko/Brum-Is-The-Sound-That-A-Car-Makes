@@ -17,6 +17,8 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
+	//CreateSensors();
+
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	//App->camera->LookAt(vec3(0, 0, 0));
 
@@ -213,4 +215,35 @@ void ModuleSceneIntro::FirstPhaseObjects()
 	CreateRectangle({ 0, 4, 60 }, { 80, 1, 0, 0 }, { 5, 15, 0.2f }, Black);
 	CreateRectangle({ 0, 2, 82 }, { -85, 1, 0, 0 }, { 5, 42, 0.2f }, Black);
 
+	//----------Finish Line--------------------------
+	c_finish.Size(30, 10, 1);
+	finish_line = App->physics->AddBody(c_finish, 0);
+	finish_line->SetPos(115, 0, 50);
+	finish_line->GetTransform(&c_finish.transform);
+	finish_line->SetAsSensor(true);
+	//finish_line->isChecked = false;
+	//finish_line->isDeath = false;
+	finish_line->collision_listeners.add(this);
+
+}
+
+void ModuleSceneIntro::CreateSensors()
+{
+	//Here we create all sensors
+
+	CreateSensor(finishLine, { 0,0,0 }, { 10,10,10 }, SensorType::FINISH);
+
+}
+
+void ModuleSceneIntro::CreateSensor(PhysBody3D*obj,vec3 pos,vec3 size,SensorType type)
+{
+	
+	Cube _cube;
+
+	_cube.Size(size.x, size.y, size.z);
+	obj->SetPos(pos.x, pos.y, pos.z);
+	obj->GetTransform(&_cube.transform);
+	obj->SetAsSensor(true);
+
+	obj->collision_listeners.add(this);
 }

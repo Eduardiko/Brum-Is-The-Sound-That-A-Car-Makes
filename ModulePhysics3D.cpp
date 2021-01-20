@@ -76,6 +76,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 	world->stepSimulation(dt, 15);
 
 	int numManifolds = world->getDispatcher()->getNumManifolds();
+	//first attempt for collisions
 	for (int i = 0; i < numManifolds; i++)
 	{
 		btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
@@ -115,6 +116,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 
 
 					case SensorType::FINISH:
+						LOG("Race finished");
 						App->player->FinishGame();
 						break;
 
@@ -145,6 +147,39 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 		}
 
 		return UPDATE_CONTINUE;
+	}
+
+	//second attempt for collisions
+	 numManifolds = world->getDispatcher()->getNumManifolds();
+	for (int i = 0; i < numManifolds; i++)
+	{
+		btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
+		btCollisionObject* obA = (btCollisionObject*)(contactManifold->getBody0());
+		btCollisionObject* obB = (btCollisionObject*)(contactManifold->getBody1());
+
+		int numContacts = contactManifold->getNumContacts();
+		if (numContacts > 0)
+		{
+			PhysBody3D* pbodyA = (PhysBody3D*)obA->getUserPointer();
+			PhysBody3D* pbodyB = (PhysBody3D*)obB->getUserPointer();
+
+			if (pbodyA && pbodyB)
+			{
+				p2List_item<Module*>* item = pbodyA->collision_listeners.getFirst();
+				while (item)
+				{
+					item->data->OnCollision(pbodyA, pbodyB);
+					item = item->next;
+				}
+
+				item = pbodyB->collision_listeners.getFirst();
+				while (item)
+				{
+					item->data->OnCollision(pbodyB, pbodyA);
+					item = item->next;
+				}
+			}
+		}
 	}
 }
 
@@ -184,6 +219,18 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 				s.SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
 				float force = 30.0f;
 				AddBody(s)->Push(-(App->camera->Z.x * force), -(App->camera->Z.y * force), -(App->camera->Z.z * force));
+
+				// Render sensors
+				p2List_item<PhysBody3D*>* itemSensor = bodies.getFirst();
+				while (itemSensor)
+				{
+					if (itemSensor->data->isSensor == true ) //&& itemSensor->data->isDeath == true
+					{
+						btVector3 red = { 255,0,0 };
+						world->debugDrawObject(itemSensor->data->body->getWorldTransform(), itemSensor->data->body->getCollisionShape(), red);
+					}
+					itemSensor = itemSensor->next;
+				}
 			}
 		}
 
@@ -296,6 +343,33 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass)
 
 	return pbody;
 }
+
+//PhysSensor3D* ModulePhysics3D::AddSensor(const Cube& cube, const vec3 gravityMod, const SensorType s_type, vec4 tarRot)
+//{
+//	btCollisionShape* colShape = new btBoxShape(btVector3(cube.size.x * 0.5f, cube.size.y * 0.5f, cube.size.z * 0.5f));
+//	shapes.add(colShape);
+//
+//	btTransform startTransform;
+//	startTransform.setFromOpenGLMatrix(&cube.transform);
+//
+//	btVector3 localInertia(0, 0, 0);
+//
+//	btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
+//	motions.add(myMotionState);
+//	btRigidBody::btRigidBodyConstructionInfo rbInfo(0.f, myMotionState, colShape, localInertia);
+//
+//	btRigidBody* body = new btRigidBody(rbInfo);
+//	PhysSensor3D* pbody = new PhysSensor3D(body, s_type);
+//	pbody->gravityMod = gravityMod;
+//	pbody->targetRot = tarRot;
+//	//pbody->SetAsSensor(true);
+//
+//	body->setUserPointer(pbody);
+//	world->addRigidBody(body);
+//	bodies.add(pbody);
+//
+//	return pbody;
+//}
 
 // ---------------------------------------------------------
 PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass)
@@ -452,29 +526,4 @@ void ModulePhysics3D::SetGravity(const vec3 v)
 	world->setGravity({ v.x, v.y, v.z });
 }
 
-//PhysSensor3D* ModulePhysics3D::AddSensor(const Cube& cube, const vec3 gravityMod, const SensorType s_type, vec4 tarRot)
-//{
-//	btCollisionShape* colShape = new btBoxShape(btVector3(cube.size.x * 0.5f, cube.size.y * 0.5f, cube.size.z * 0.5f));
-//	shapes.add(colShape);
-//
-//	btTransform startTransform;
-//	startTransform.setFromOpenGLMatrix(&cube.transform);
-//
-//	btVector3 localInertia(0, 0, 0);
-//
-//	btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
-//	motions.add(myMotionState);
-//	btRigidBody::btRigidBodyConstructionInfo rbInfo(0.f, myMotionState, colShape, localInertia);
-//
-//	btRigidBody* body = new btRigidBody(rbInfo);
-//	PhysSensor3D* pbody = new PhysSensor3D(body, s_type);
-//	pbody->gravityMod = gravityMod;
-//	pbody->targetRot = tarRot;
-//	//pbody->SetAsSensor(true);
-//
-//	body->setUserPointer(pbody);
-//	world->addRigidBody(body);
-//	bodies.add(pbody);
-//
-//	return pbody;
-//}
+
