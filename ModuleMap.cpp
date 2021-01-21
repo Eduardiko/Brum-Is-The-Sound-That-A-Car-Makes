@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleMap.h"
 #include "Primitive.h"
+#include "ModulePhysics3D.h"
 #include "PhysBody3D.h"
 
 ModuleMap::ModuleMap(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -92,24 +93,15 @@ PhysBody3D* ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius
 	return App->physics->AddBody(*object, mass);
 }
 
-void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color s_color, SensorType s_type, vec3 mod, vec4 target_rotation)
+PhysSensor3D* ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, PhysSensor3D::Type type, float mass)
 {
 	Cube* object = new Cube();
 
-	object->SetPos(position.x, position.y,position.z);
+	object->SetPos(position.x, position.y, position.z);
 	object->size = size;
-	object->color = s_color;
 	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
-
-	/*if (s_type == SensorType::CHECKPOINT) 
-	{
-		checkPoints[checkpointCounter] = map_sensors.add(App->physics->AddSensor(*object, mod, s_type, target_rotation))->data;
-		checkpointCounter++;
-	}*/
-	//else
-	
-		//map_sensors.add(App->physics->AddSensor(*object, mod, s_type, target_rotation));
-	
+	//map_objects.add(object);
+	return App->physics->AddSensor(*object, type);
 }
 
 void ModuleMap::FirstPhaseObjects()
@@ -138,11 +130,7 @@ void ModuleMap::LastPhaseObjects()
 void ModuleMap::CreateSensors()
 {
 	//Here we add all sensors:
-	CreateSensor({ -50,1,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, Green, SensorType::BOOSTER, { 0,10,0 });
-
-	
-	//Winning condition
-	CreateSensor({ 0,0,0 }, { -45,1,0,0 }, { 8, 8, 8 }, White, SensorType::FINISH, { 0,0,0 });
+	CreateSensor({ 0,0,10.0f }, { 0,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::FINISH);
 }
 
 void ModuleMap::CreateConstrains()

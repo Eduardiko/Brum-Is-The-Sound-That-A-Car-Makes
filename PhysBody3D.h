@@ -8,17 +8,6 @@
 class btRigidBody;
 class Module;
 
-enum SensorType {
-
-	BOOSTER,
-	FINISH,
-	START,
-	CHECKPOINT,
-	RESPAWN,
-	COIN
-};
-
-
 // =================================================
 struct PhysBody3D
 {
@@ -31,34 +20,37 @@ public:
 	void GetTransform(float* matrix) const;
 	void SetTransform(const float* matrix) const;
 	void SetPos(float x, float y, float z);
-	bool IsSensor();
-	void SetAsSensor(bool isSensor);
+	bool IsSensor() { return is_sensor; };
 
 	btRigidBody* body = nullptr;
-	bool isSensor;
 
 private:
 
 public:
 	p2List<Module*> collision_listeners;
+	bool is_sensor;
 };
 
 struct PhysSensor3D : public PhysBody3D
 {
 
 public:
-	PhysSensor3D(btRigidBody* body, SensorType s_type);
+	enum class Type
+	{
+		FINISH,
+		LAP,
+		DEAD
+	};
+
+	PhysSensor3D(btRigidBody* body, Type _type);
 	~PhysSensor3D();
 
-	void SetAsSensor(bool is_sensor);
+	void SetAsSensor();
 
 public:
-	SensorType type;
-	vec3 gravityMod;
-	vec4 targetRot;
 	bool isEnabled;
-
-	Primitive* lights[2];
+	Type type;
 };
+
 
 #endif // __PhysBody3D_H__

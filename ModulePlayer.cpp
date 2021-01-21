@@ -98,8 +98,54 @@ bool ModulePlayer::Start()
 	car.spawnPosition = { 0, 12, 10 };
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(car.spawnPosition.x , car.spawnPosition.y, car.spawnPosition.z);
+	vehicle->SetPos(car.spawnPosition.x, car.spawnPosition.y, car.spawnPosition.z);
+
+	VehicleInfo carriCoche;
+	carriCoche.chassis_size.Set(2, 1, 2);
+	carriCoche.chassis_offset.Set(0, 1.5, 0);
+	carriCoche.mass = 200.0f;
+	carriCoche.suspensionStiffness = 15.88f;
+	carriCoche.suspensionCompression = 0.83f;
+	carriCoche.suspensionDamping = 0.88f;
+	carriCoche.maxSuspensionTravelCm = 1000.0f;
+	carriCoche.frictionSlip = 50.5;
+	carriCoche.maxSuspensionForce = 6000.0f;
+
+	connection_height = 1.8f;
+
+	half_width = carriCoche.chassis_size.x * 0.5f;
+	half_length = carriCoche.chassis_size.z * 0.5f;
+
+	carriCoche.num_wheels = 2;
+	carriCoche.wheels = new Wheel[2];
+
+	carriCoche.wheels[0].connection.Set(half_width - 0.3f * wheel_width, connection_height, 0.0f);
+	carriCoche.wheels[0].direction = direction;
+	carriCoche.wheels[0].axis = axis;
+	carriCoche.wheels[0].suspensionRestLength = suspensionRestLength;
+	carriCoche.wheels[0].radius = wheel_radius;
+	carriCoche.wheels[0].width = wheel_width;
+	carriCoche.wheels[0].front = true;
+	carriCoche.wheels[0].drive = true;
+	carriCoche.wheels[0].brake = false;
+	carriCoche.wheels[0].steering = true;
+
+	carriCoche.wheels[1].connection.Set(-half_width + 0.3f * wheel_width, connection_height, 0.0f);
+	carriCoche.wheels[1].direction = direction;
+	carriCoche.wheels[1].axis = axis;
+	carriCoche.wheels[1].suspensionRestLength = suspensionRestLength;
+	carriCoche.wheels[1].radius = wheel_radius;
+	carriCoche.wheels[1].width = wheel_width;
+	carriCoche.wheels[1].front = true;
+	carriCoche.wheels[1].drive = true;
+	carriCoche.wheels[1].brake = false;
+	carriCoche.wheels[1].steering = true;
 	
+	trolley = App->physics->AddVehicle(carriCoche);
+	trolley->SetPos(0, 1, 8);
+
+	App->physics->AddConstraintP2P(*vehicle, *trolley, vec3(0, -0.6f, -1.6f), vec3(0, 0, 2));
+
 	App->camera->vehicleToLook = vehicle;
 
 	return true;
@@ -163,6 +209,7 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->Brake(brake);
 
 	vehicle->Render();
+	trolley->Render();
 
 	char title[80];
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());

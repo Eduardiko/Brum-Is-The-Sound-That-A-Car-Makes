@@ -25,6 +25,7 @@ public:
 public:
 
 	PhysVehicle3D* vehicle;
+	PhysVehicle3D* trolley;
 
 	float turn;
 	float acceleration;

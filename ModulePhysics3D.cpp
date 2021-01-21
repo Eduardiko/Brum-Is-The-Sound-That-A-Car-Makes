@@ -101,27 +101,14 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 				{
 					sensor = (PhysSensor3D*)pbodyB;
 				}
-
-				if (sensor && sensor->isEnabled)
+				switch (sensor->type)
 				{
-					switch (sensor->type)
+					case PhysSensor3D::Type::FINISH:
 					{
-
-
-
-					case SensorType::BOOSTER:
-						//App->player->speed_bost = true;
-						//App->audio->PlayFx(App->map->boostSound);
-						break;
-
-
-					case SensorType::FINISH:
 						LOG("Race finished");
 						App->player->FinishGame();
 						break;
-
 					}
-
 				}
 			}
 			else
@@ -143,6 +130,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					}
 				}
 			}
+
 
 		}
 
@@ -224,7 +212,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 				p2List_item<PhysBody3D*>* itemSensor = bodies.getFirst();
 				while (itemSensor)
 				{
-					if (itemSensor->data->isSensor == true ) //&& itemSensor->data->isDeath == true
+					if (itemSensor->data->is_sensor == true ) //&& itemSensor->data->isDeath == true
 					{
 						btVector3 red = { 255,0,0 };
 						world->debugDrawObject(itemSensor->data->body->getWorldTransform(), itemSensor->data->body->getCollisionShape(), red);
@@ -344,32 +332,32 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass)
 	return pbody;
 }
 
-//PhysSensor3D* ModulePhysics3D::AddSensor(const Cube& cube, const vec3 gravityMod, const SensorType s_type, vec4 tarRot)
-//{
-//	btCollisionShape* colShape = new btBoxShape(btVector3(cube.size.x * 0.5f, cube.size.y * 0.5f, cube.size.z * 0.5f));
-//	shapes.add(colShape);
-//
-//	btTransform startTransform;
-//	startTransform.setFromOpenGLMatrix(&cube.transform);
-//
-//	btVector3 localInertia(0, 0, 0);
-//
-//	btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
-//	motions.add(myMotionState);
-//	btRigidBody::btRigidBodyConstructionInfo rbInfo(0.f, myMotionState, colShape, localInertia);
-//
-//	btRigidBody* body = new btRigidBody(rbInfo);
-//	PhysSensor3D* pbody = new PhysSensor3D(body, s_type);
-//	pbody->gravityMod = gravityMod;
-//	pbody->targetRot = tarRot;
-//	//pbody->SetAsSensor(true);
-//
-//	body->setUserPointer(pbody);
-//	world->addRigidBody(body);
-//	bodies.add(pbody);
-//
-//	return pbody;
-//}
+PhysSensor3D* ModulePhysics3D::AddSensor(const Cube& cube, PhysSensor3D::Type type, float mass)
+{
+	btCollisionShape* colShape = new btBoxShape(btVector3(cube.size.x * 0.5f, cube.size.y * 0.5f, cube.size.z * 0.5f));
+	shapes.add(colShape);
+
+	btTransform startTransform;
+	startTransform.setFromOpenGLMatrix(&cube.transform);
+
+	btVector3 localInertia(0, 0, 0);
+	if (mass != 0.f)
+		colShape->calculateLocalInertia(mass, localInertia);
+
+	btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
+	motions.add(myMotionState);
+	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, colShape, localInertia);
+
+	btRigidBody* body = new btRigidBody(rbInfo);
+	PhysSensor3D* pbody = new PhysSensor3D(body, type);
+	pbody->SetAsSensor();
+
+	body->setUserPointer(pbody);
+	world->addRigidBody(body);
+	bodies.add(pbody);
+
+	return pbody;
+}
 
 // ---------------------------------------------------------
 PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass)
@@ -525,5 +513,6 @@ void ModulePhysics3D::SetGravity(const vec3 v)
 {
 	world->setGravity({ v.x, v.y, v.z });
 }
+
 
 
