@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleMap.h"
+#include "ModulePlayer.h"
 #include "Primitive.h"
 #include "ModulePhysics3D.h"
 #include "PhysBody3D.h"
@@ -130,7 +131,7 @@ void ModuleMap::LastPhaseObjects()
 void ModuleMap::CreateSensors()
 {
 	//Here we add all sensors:
-	CreateSensor({ 0,0,10.0f }, { 0,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::FINISH);
+	CreateSensor({ 0,0,20.0f }, { 0,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::FINISH);
 }
 
 void ModuleMap::CreateConstrains()

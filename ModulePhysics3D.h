@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "p2List.h"
 #include "Primitive.h"
+#include "PhysBody3D.h"
 
 #include "Bullet/include/btBulletDynamicsCommon.h"
 

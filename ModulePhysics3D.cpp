@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModulePhysics3D.h"
 #include "ModulePlayer.h"
+#include "ModuleMap.h"
 #include "PhysBody3D.h"
 #include "PhysVehicle3D.h"
 #include "Primitive.h"
@@ -355,6 +356,8 @@ PhysSensor3D* ModulePhysics3D::AddSensor(const Cube& cube, PhysSensor3D::Type ty
 	body->setUserPointer(pbody);
 	world->addRigidBody(body);
 	bodies.add(pbody);
+
+	//finish_line->collision_listeners.add(this);
 
 	return pbody;
 }
