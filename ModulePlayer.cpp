@@ -95,7 +95,7 @@ bool ModulePlayer::Start()
 	car.wheels[3].brake = true;
 	car.wheels[3].steering = false;
 
-	car.spawnPosition = { 0, 12, 10 };
+	car.spawnPosition = { 0, 12,10 };
 
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(car.spawnPosition.x, car.spawnPosition.y, car.spawnPosition.z);
@@ -147,6 +147,9 @@ bool ModulePlayer::Start()
 	App->physics->AddConstraintP2P(*vehicle, *trolley, vec3(0, -0.6f, -1.6f), vec3(0, 0, 2));
 
 	App->camera->vehicleToLook = vehicle;
+
+	//Checkpoints information
+	
 
 	return true;
 }
@@ -255,7 +258,6 @@ void ModulePlayer::FinishGame()
 
 void ModulePlayer::RespawnCar()
 {
-	LOG("Respawning vehicle");
 	App->audio->PlayFx(App->audio->respawnSoundFx);
 
 	App->physics->SetGravity({ GRAVITY.getX(), GRAVITY.getY(), GRAVITY.getZ() });
@@ -264,7 +266,30 @@ void ModulePlayer::RespawnCar()
 
 	//Correct position and rotation
 	carMatrix.rotate(0, { 0, 1, 0 });
-	carMatrix.translate(vehicle->info.spawnPosition.x, vehicle->info.spawnPosition.y, vehicle->info.spawnPosition.z);
+	if (App->map->checkPointsSpawn[0].isEnabled == false)
+	{
+		LOG("Respawning vehicle");
+		carMatrix.translate(vehicle->info.spawnPosition.x, vehicle->info.spawnPosition.y, vehicle->info.spawnPosition.z);
+	}
+	else
+	{
+		for (int i = 0; App->map->checkPointsSpawn[i].isEnabled == true; i++)
+		{
+			if(App->map->checkPointsSpawn[i+1].isEnabled !=true )
+			{
+
+				if (App->map->checkPointsSpawn[i].isEnabled == true)
+				{
+					LOG("Respawning vehicle from ckeckpoint %d", i + 1);
+					carMatrix.translate(App->map->checkPointsSpawn[i].pos.x, App->map->checkPointsSpawn[i].pos.y, App->map->checkPointsSpawn[i].pos.z);
+
+					break;
+				}
+			}
+		}
+
+	}
+	
 
 	//Set corrected transform
 	vehicle->SetTransform(&carMatrix.M[0]);
@@ -287,5 +312,8 @@ void ModulePlayer::RespawnCar()
 	}
 }
 
-
+void ModulePlayer::PickBooster()
+{
+	
+}
 

@@ -33,6 +33,16 @@ bool ModuleMap::Start()
 	CreateSensors();
 	CreateConstrains();*/
 
+	//Checkpoints info
+	checkPointsSpawn[0].isEnabled = false;
+	checkPointsSpawn[0].pos = { 110.0f , 110.0f , 0.0f};
+
+	checkPointsSpawn[1].isEnabled = false;
+	checkPointsSpawn[1].pos = { 0.0f , 0.0f , 0.0f };
+
+	checkPointsSpawn[2].isEnabled = false;
+	checkPointsSpawn[2].pos = { 1110.0f , 1110.0f , 0.0f };
+
 	CreateSensors();
 
 	return ret;
@@ -132,6 +142,9 @@ void ModuleMap::CreateSensors()
 {
 	//Here we add all sensors:
 	CreateSensor({ 0,0,20.0f }, { 0,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::FINISH);
+
+	CreateSensor({ 0,4.10f }, { 0,1, 0, 0 }, { 114,110,10.5f }, PhysSensor3D::Type::FINISH);
+
 }
 
 void ModuleMap::CreateConstrains()

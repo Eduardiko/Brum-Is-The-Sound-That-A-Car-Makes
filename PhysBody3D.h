@@ -8,6 +8,7 @@
 class btRigidBody;
 class Module;
 
+
 // =================================================
 struct PhysBody3D
 {
@@ -38,6 +39,10 @@ public:
 	enum class Type
 	{
 		FINISH,
+		CHECKPOINT_1,
+		CHECKPOINT_2,
+		CHECKPOINT_3,
+		BOOSTER,
 		LAP,
 		DEAD
 	};
@@ -50,6 +55,8 @@ public:
 public:
 	bool isEnabled;
 	Type type;
+
+	
 };
 
 

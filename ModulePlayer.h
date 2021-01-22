@@ -21,6 +21,7 @@ public:
 
 	void FinishGame();
 	void RespawnCar();
+	void PickBooster();
 
 public:
 
@@ -29,6 +30,7 @@ public:
 
 	float turn;
 	float acceleration;
+	float boostedAcceleration;
 	float brake;
 
 	bool gameHasFinished = false;

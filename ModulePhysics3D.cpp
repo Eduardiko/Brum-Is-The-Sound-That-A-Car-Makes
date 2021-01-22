@@ -92,7 +92,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 
 			if ((pbodyA && pbodyA->IsSensor()) || (pbodyB && pbodyB->IsSensor()))
 			{
-
+				LOG("Sensor triggered");
 				PhysSensor3D* sensor = nullptr;
 				if (pbodyA && pbodyA->IsSensor())
 				{
@@ -110,6 +110,56 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 						App->player->FinishGame();
 						break;
 					}
+
+					case PhysSensor3D::Type::CHECKPOINT_1:
+					{
+						if (App->map->checkPointsSpawn[0].isEnabled == false)
+						{
+							LOG("Checkpoint 1 enabled");
+						}
+						else
+						{
+							App->map->checkPointsSpawn[0].isEnabled = true;
+						}
+					}
+					case PhysSensor3D::Type::CHECKPOINT_2:
+					{
+						if (App->map->checkPointsSpawn[1].isEnabled == false)
+						{
+							LOG("Checkpoint 2 enabled");
+						}
+						else
+						{
+							App->map->checkPointsSpawn[1].isEnabled = true;
+						}
+					}
+					case PhysSensor3D::Type::CHECKPOINT_3:
+					{
+						if (App->map->checkPointsSpawn[2].isEnabled == false)
+						{
+							LOG("Checkpoint 3 enabled");
+						}
+						else
+						{
+							App->map->checkPointsSpawn[2].isEnabled = true;
+						}
+					}
+
+					case PhysSensor3D::Type::DEAD:
+					{
+						LOG("Player died");
+						App->player->RespawnCar();
+						break;
+					}
+					
+					case PhysSensor3D::Type::BOOSTER:
+					{
+						LOG("Player picked booster");
+						
+						break;
+					}
+
+
 				}
 			}
 			else

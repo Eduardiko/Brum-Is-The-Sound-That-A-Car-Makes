@@ -12,6 +12,11 @@ struct PhysBody3D;
 struct PhysMotor3D;
 struct PhysSensor3D;
 
+struct CheckPoint {
+	vec3 pos;
+	bool isEnabled;
+};
+
 enum SensorType;
 class btHingeConstraint;
 
@@ -50,4 +55,6 @@ public:
 	p2List<Primitive*> map_objects;
 	p2List<PhysSensor3D*> map_sensors;
 	PhysSensor3D* checkPoints[3];
+
+	CheckPoint checkPointsSpawn[5];
 };
