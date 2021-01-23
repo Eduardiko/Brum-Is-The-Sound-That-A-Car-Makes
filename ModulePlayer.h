@@ -33,5 +33,7 @@ public:
 	float boostedAcceleration;
 	float brake;
 
+	bool isBoosted;
+
 	bool gameHasFinished = false;
 };

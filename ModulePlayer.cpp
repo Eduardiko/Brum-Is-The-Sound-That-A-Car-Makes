@@ -148,6 +148,8 @@ bool ModulePlayer::Start()
 
 	App->camera->vehicleToLook = vehicle;
 
+	isBoosted = false;
+
 	//Checkpoints information
 	
 
@@ -165,7 +167,14 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
-	turn = acceleration = brake = 0.0f;
+	if (isBoosted)
+	{
+		acceleration = boostedAcceleration;
+		//counter
+	}
+	
+	else
+		turn = acceleration = brake = 0.0f;
 
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{
