@@ -32,6 +32,8 @@ public:
 	float acceleration;
 	float boostedAcceleration;
 	float brake;
+	bool laps;
+	int lapsCounter;
 
 	bool gameHasFinished = false;
 };

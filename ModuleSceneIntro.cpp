@@ -194,12 +194,12 @@ void ModuleSceneIntro::FirstPhaseObjects()
 	CreateRectangle({ -22,7,25 }, { 0,0,0,1 }, { 1,15.f,3 }, Black);
 	CreateRectangle({ -22,7,30 }, { 0,0,0,1 }, { 1,15.f,3 }, Black);
 	//-----------------------------------------------------------------
-	CreateRectangle({ -17,7,-85 }, { 0,0,0,1 }, { 4,15.f,1 }, Black);
-	CreateRectangle({ -12,7,-85 }, { 0,0,0,1 }, { 4,15.f,1 }, Black);
-	CreateRectangle({ -7,7,-85 }, { 0,0,0,1 }, { 4,15.f,1 }, Black);
-	CreateRectangle({ -2,7,-85 }, { 0,0,0,1 }, { 4,15.f,1 }, Black);
-	CreateRectangle({ 3,7,-85 }, { 0,0,0,1 }, { 4,15.f,1 }, Black);
-	CreateRectangle({ 8,7,-85 }, { 0,0,0,1 }, { 4,15.f,1 }, Black);
+	CreateRectangle({ -19,7,-85 }, { 0,0,0,1 }, { 4,15.f,1 }, Black);
+	CreateRectangle({ -14,7,-85 }, { 0,0,0,1 }, { 4,15.f,1 }, Black);
+	CreateRectangle({ -9,7,-85 }, { 0,0,0,1 }, { 4,15.f,1 }, Black);
+	CreateRectangle({ -4,7,-85 }, { 0,0,0,1 }, { 4,15.f,1 }, Black);
+	CreateRectangle({ 1,7,-85 }, { 0,0,0,1 }, { 4,15.f,1 }, Black);
+	CreateRectangle({ 6,7,-85 }, { 0,0,0,1 }, { 4,15.f,1 }, Black);
 	//-----------------------------------------------------------------
 	CreateRectangle({ 7,7,-85 }, { 0,0,0,1 }, { 1,15.f,3 }, Black);
 	CreateRectangle({ 7,7,-80 }, { 0,0,0,1 }, { 1,15.f,3 }, Black);

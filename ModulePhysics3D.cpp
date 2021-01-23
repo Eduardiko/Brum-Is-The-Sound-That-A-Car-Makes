@@ -80,6 +80,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 	//first attempt for collisions
 	for (int i = 0; i < numManifolds; i++)
 	{
+		
 		btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
 		btCollisionObject* obA = (btCollisionObject*)(contactManifold->getBody0());
 		btCollisionObject* obB = (btCollisionObject*)(contactManifold->getBody1());
@@ -107,10 +108,15 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					case PhysSensor3D::Type::FINISH:
 					{
 						LOG("Race finished");
-						App->player->FinishGame();
+						if (App->player->laps == true)
+						{
+							App->player->lapsCounter += 1;
+						}
+						App->player->laps = false;
+						LOG("%d", App->player->lapsCounter);
+						//App->player->FinishGame();
 						break;
 					}
-
 					case PhysSensor3D::Type::CHECKPOINT_1:
 					{
 						if (App->map->checkPointsSpawn[0].isEnabled == false)
@@ -144,14 +150,19 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 							App->map->checkPointsSpawn[2].isEnabled = true;
 						}
 					}
-
 					case PhysSensor3D::Type::DEAD:
 					{
 						LOG("Player died");
 						App->player->RespawnCar();
 						break;
 					}
-					
+					case PhysSensor3D::Type::LAP:
+					{
+						LOG("lap targeted");
+						App->player->laps = true;
+
+					}
+					break;
 					case PhysSensor3D::Type::BOOSTER:
 					{
 						LOG("Player picked booster");
@@ -181,15 +192,11 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					}
 				}
 			}
-
-
 		}
-
-		return UPDATE_CONTINUE;
 	}
 
 	//second attempt for collisions
-	 numManifolds = world->getDispatcher()->getNumManifolds();
+	/*numManifolds = world->getDispatcher()->getNumManifolds();
 	for (int i = 0; i < numManifolds; i++)
 	{
 		btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
@@ -219,7 +226,8 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 				}
 			}
 		}
-	}
+	}*/
+	return UPDATE_CONTINUE;
 }
 
 // ---------------------------------------------------------
@@ -252,7 +260,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 				item = item->next;
 			}
 
-			if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+			/*if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 			{
 				Sphere s(1);
 				s.SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
@@ -270,7 +278,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					}
 					itemSensor = itemSensor->next;
 				}
-			}
+			}*/
 		}
 
 		return UPDATE_CONTINUE;
