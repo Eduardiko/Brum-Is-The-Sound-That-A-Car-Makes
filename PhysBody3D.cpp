@@ -4,7 +4,9 @@
 
 // =================================================
 PhysBody3D::PhysBody3D(btRigidBody* body) : body(body)
-{}
+{
+	is_sensor = false;
+}
 
 // ---------------------------------------------------------
 PhysBody3D::~PhysBody3D()

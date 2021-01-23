@@ -8,6 +8,8 @@
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
 	turn = acceleration = brake = 0.0f;
+	laps = false;
+	lapsCounter = 0;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -141,10 +143,10 @@ bool ModulePlayer::Start()
 	carriCoche.wheels[1].brake = false;
 	carriCoche.wheels[1].steering = true;
 	
-	trolley = App->physics->AddVehicle(carriCoche);
-	trolley->SetPos(0, 1, 8);
+	//trolley = App->physics->AddVehicle(carriCoche);
+	//trolley->SetPos(0, 1, 8);
 
-	App->physics->AddConstraintP2P(*vehicle, *trolley, vec3(0, -0.6f, -1.6f), vec3(0, 0, 2));
+	//App->physics->AddConstraintP2P(*vehicle, *trolley, vec3(0, -0.6f, -1.6f), vec3(0, 0, 2));
 
 	App->camera->vehicleToLook = vehicle;
 
@@ -221,7 +223,7 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->Brake(brake);
 
 	vehicle->Render();
-	trolley->Render();
+	//trolley->Render();
 
 	char title[80];
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());

@@ -23,10 +23,8 @@ public:
 	void SetPos(float x, float y, float z);
 	bool IsSensor() { return is_sensor; };
 
+protected:
 	btRigidBody* body = nullptr;
-
-private:
-
 public:
 	p2List<Module*> collision_listeners;
 	bool is_sensor;

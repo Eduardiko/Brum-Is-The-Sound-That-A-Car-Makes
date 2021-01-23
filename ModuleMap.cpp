@@ -141,10 +141,24 @@ void ModuleMap::LastPhaseObjects()
 void ModuleMap::CreateSensors()
 {
 	//Here we add all sensors:
-	CreateSensor({ 0,0,20.0f }, { 0,1, 0, 0 }, { 14,10,0.5f }, PhysSensor3D::Type::FINISH);
-
-	CreateSensor({ 0,4.10f }, { 0,1, 0, 0 }, { 114,110,10.5f }, PhysSensor3D::Type::FINISH);
-
+	//FINISH
+	CreateSensor({ 0,0,-8 }, { 0,1, 0, 0 }, { 14,110,2.f }, PhysSensor3D::Type::FINISH);
+	//LAP
+	CreateSensor({ -14,0,-8 }, { 0,1, 0, 0 }, { 14,110,2.f }, PhysSensor3D::Type::LAP);
+	//-------------------------------------------------------------------------------------
+	//WALL LEFT CURVE
+	CreateSensor({ 0,0,70 }, { 0,0,0,1 }, {14,1.f,60 }, PhysSensor3D::Type::DEAD);
+	//WALL FRONT 
+	CreateSensor({ 10,1,128 }, { 0,0,0,1 }, { 2,5.f,50 }, PhysSensor3D::Type::DEAD);
+	//WALL RIGHT CURVE
+	CreateSensor({ -25,1,128 }, { 0,0,0,1 }, { 2,5.f,50 }, PhysSensor3D::Type::DEAD);
+	//MEGA-WALL-MAP
+	CreateSensor({ -24,1,85-15 }, { 0,0,0,1 }, { 10,70.f,80 }, PhysSensor3D::Type::DEAD);
+	//MEGA-WALL-MAP
+	CreateSensor({ -27,1,-5 }, { 0,0,0,1 }, { 10,70.f,80 }, PhysSensor3D::Type::DEAD);
+	CreateSensor({ 0,1,150 }, { 0,0,0,1 }, { 50,5.f,2 }, PhysSensor3D::Type::DEAD);
+	//CreateSensor({ 0,0,70 }, { 0,0,0,1 }, { 14,1.f,60 }, PhysSensor3D::Type::DEAD);
+	//CreateSensor({ 0,0,70 }, { 0,0,0,1 }, { 14,1.f,60 }, PhysSensor3D::Type::DEAD);
 }
 
 void ModuleMap::CreateConstrains()
