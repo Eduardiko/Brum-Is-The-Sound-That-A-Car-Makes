@@ -9,11 +9,14 @@ CONTROLS:
 
 -DOWN ARROW - Move backwards
 
+DEBUG CONTROLS:
 
 -F5 - DEBUG KEY TO REESPAWN IN THE BEGGINING OF THE LEVEL
+
 -F8 - BOOST.
 
-EXPLANATION
+EXPLANATION:
+
 The goal of the game is to complete 3 laps, if you fail getting out of the limits you will go to the lose lobby where you will be able to reestart, when 
 you finish it it will drop a GG!.
 
