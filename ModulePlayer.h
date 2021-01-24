@@ -43,4 +43,7 @@ public:
 	bool two = false;
 	bool three = false;
 	bool gg = false;
+private:
+	int boostCounter;
+	float boostAceleration;
 };

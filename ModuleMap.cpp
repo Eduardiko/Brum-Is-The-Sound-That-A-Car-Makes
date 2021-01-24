@@ -157,6 +157,7 @@ void ModuleMap::CreateSensors()
 	CreateSensor({ -24,1,85 - 15 }, { 0,0,0,1 }, { 10,70.f,80 }, PhysSensor3D::Type::DEAD);
 	//---------------------------------------------------------------------------------
 	CreateSensor({ -14,1,25 }, { 0,0,0,1 }, { 14,24,2 }, PhysSensor3D::Type::BOOSTER);
+	CreateSensor({ 0,0,0 }, { 0,0,0,1 }, { 14,24,2 }, PhysSensor3D::Type::BOOSTER);
 	//MEGA-WALL-MAP
 	CreateSensor({ -27,1,-5 }, { 0,0,0,1 }, { 10,70.f,80 }, PhysSensor3D::Type::DEAD);
 	CreateSensor({ 0,1,150 }, { 0,0,0,1 }, { 50,5.f,2 }, PhysSensor3D::Type::DEAD);
