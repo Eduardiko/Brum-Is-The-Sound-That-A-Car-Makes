@@ -164,6 +164,8 @@ void ModuleMap::CreateSensors()
 	//CreateSensor({ 0,0,70 }, { 0,0,0,1 }, { 14,1.f,60 }, PhysSensor3D::Type::DEAD);
 	//CreateSensor({ 0,0,70 }, { 0,0,0,1 }, { 14,1.f,60 }, PhysSensor3D::Type::DEAD);
 
+	CreateSensor({ 300,1,10 }, { 0,0,0,1 }, { 5,5.f,5 }, PhysSensor3D::Type::REESTART);
+
 	
 }
 

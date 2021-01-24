@@ -153,7 +153,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					case PhysSensor3D::Type::DEAD:
 					{
 						LOG("Player died");
-						App->player->RespawnCar();
+						App->player->DeadCar();
 						break;
 					}
 					case PhysSensor3D::Type::LAP:
@@ -167,6 +167,11 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					{
 						LOG("Player picked booster");
 						App->player->PickBooster();
+						break;
+					}
+					case PhysSensor3D::Type::REESTART:
+					{
+						App->player->RespawnCar();
 						break;
 					}
 

@@ -337,6 +337,70 @@ void ModulePlayer::RespawnCar()
 	}
 }
 
+void ModulePlayer::DeadCar()
+{
+	App->physics->SetGravity({ GRAVITY.getX(), GRAVITY.getY(), GRAVITY.getZ() });
+	mat4x4 carMatrix;
+	mat4x4 carriCoche;
+	vehicle->GetTransform(&carMatrix);
+	trolley->GetTransform(&carriCoche);
+
+	//Correct position and rotation
+	carMatrix.rotate(0, { 0, 1, 0 });
+	carriCoche.rotate(0, { 0, 1, 0 });
+	if (App->map->checkPointsSpawn[0].isEnabled == false)
+	{
+		LOG("Respawning vehicle");
+		carMatrix.translate(300, 1, 0);
+		carriCoche.translate(300, 1, -5);
+	}
+	else
+	{
+		for (int i = 0; App->map->checkPointsSpawn[i].isEnabled == true; i++)
+		{
+			if (App->map->checkPointsSpawn[i + 1].isEnabled != true)
+			{
+
+				if (App->map->checkPointsSpawn[i].isEnabled == true)
+				{
+					LOG("Respawning vehicle from ckeckpoint %d", i + 1);
+					carMatrix.translate(App->map->checkPointsSpawn[i].pos.x, App->map->checkPointsSpawn[i].pos.y, App->map->checkPointsSpawn[i].pos.z);
+
+					break;
+				}
+			}
+		}
+
+	}
+
+
+	//Set corrected transform
+	vehicle->SetTransform(&carMatrix.M[0]);
+	trolley->SetTransform(&carriCoche.M[0]);
+	//Correct velocity (set to 0)
+	vehicle->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	trolley->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+	trolley->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+
+	vehicle->rotating = false;
+	trolley->rotating = false;
+	vehicle->currentAngle = 0;
+	trolley->currentAngle = 0;
+
+	App->player->one = false;
+	App->player->two = false;
+	App->player->three = false;
+	App->player->gg = false;
+
+	p2List_item<PhysSensor3D*>* item = App->map->map_sensors.getFirst();
+	while (item)
+	{
+		item->data->isEnabled = true;
+		item = item->next;
+	}
+}
+
 void ModulePlayer::PickBooster()
 {
 	isBoosted = true;
