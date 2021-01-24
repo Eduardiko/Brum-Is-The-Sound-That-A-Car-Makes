@@ -21,6 +21,7 @@ public:
 
 	void FinishGame();
 	void RespawnCar();
+	void DeadCar();
 	void PickBooster();
 
 public:

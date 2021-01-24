@@ -42,7 +42,8 @@ public:
 		CHECKPOINT_3,
 		BOOSTER,
 		LAP,
-		DEAD
+		DEAD,
+		REESTART
 	};
 
 	PhysSensor3D(btRigidBody* body, Type _type);
