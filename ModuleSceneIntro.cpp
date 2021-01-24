@@ -49,6 +49,52 @@ update_status ModuleSceneIntro::Update(float dt)
 		item = item->next;
 	}
 
+	if (App->player->lapsCounter == 0 && App->player->one == false)
+	{
+		CreateRectangle({ 10.0f,16,180 }, { 0,0,0,1 }, { 1,8.0f,1 }, Green);
+		CreateRectangle({ 10.8f + 0.8f,18,180 }, { 30,0,0,1 }, { 1,3.0f,1 }, Green);
+		App->player->one = true;
+	}
+	else if (App->player->lapsCounter == 1 && App->player->two == false)
+	{
+		CreateRectangle({ 12 - 8, 16 + 3,180 }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		CreateRectangle({ 14 - 8, 12 + 3,180 }, { 90,0,0,1 }, { 3,1,1 }, Green);
+		CreateRectangle({ 12 - 8, 13 + 3,180 }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		CreateRectangle({ 10 - 8, 15 + 3,180 }, { 90,0,0,1 }, { 3,1,1 }, Green);
+		CreateRectangle({ 12 - 8, 10 + 3,180 }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		App->player->two = true;
+		App->player->one = false;
+	}
+	else if (App->player->lapsCounter == 2 && App->player->three == false)
+	{
+		CreateRectangle({ 12 - 16,18 + 1,180 }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		CreateRectangle({ 10 - 16,17 + 1,180 }, { 90,0,0,1 }, { 3,1,1 }, Green);
+		CreateRectangle({ 12 - 16,15 + 1,180 }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		CreateRectangle({ 10 - 16,14 + 1,180 }, { 90,0,0,1 }, { 3,1,1 }, Green);
+		CreateRectangle({ 12 - 16,12 + 1,180 }, { 0,0,0,1 }, { 5,1,1 }, Green);
+		App->player->three = true;
+		App->player->two = false;
+	}
+	else if (App->player->lapsCounter == 3 && App->player->gg == false)
+	{
+		float xregulator = 5.0f;
+		CreateRectangle({ 0 + xregulator,16 + 13,180 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+		CreateRectangle({ 2 + xregulator, 15 + 13,180 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+		CreateRectangle({ -1.6f + xregulator,13 + 13,180 }, { 0,0,0,1 }, { 1,1,1 }, Red);
+		CreateRectangle({ 2 + xregulator, 12 + 13,180 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+		CreateRectangle({ -2 + xregulator, 12 + 13,180 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+		CreateRectangle({ 0 + xregulator, 10 + 13,180 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+
+		CreateRectangle({ -6 + xregulator,16 + 13,180 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+		CreateRectangle({ -4 + xregulator, 15 + 13,180 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+		CreateRectangle({ -7.6f + xregulator,13 + 13,180 }, { 0,0,0,1 }, { 1,1,1 }, Red);
+		CreateRectangle({ -4 + xregulator, 12 + 13,180 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+		CreateRectangle({ -8 + xregulator, 12 + 13,180 }, { 90,0,0,1 }, { 3,1,1 }, Red);
+		CreateRectangle({ -6 + xregulator, 10 + 13,180 }, { 0,0,0,1 }, { 5,1,1 }, Red);
+		App->player->gg = true;
+		App->player->three = false;
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -247,6 +293,10 @@ void ModuleSceneIntro::FirstPhaseObjects()
 	////finish_line->isChecked = false;
 	////finish_line->isDeath = false;
 	//finish_line->collision_listeners.add(this);
+
+	//---------------GG-----------------------------------------------
+
+	
 
 }
 

@@ -97,7 +97,7 @@ bool ModulePlayer::Start()
 	car.wheels[3].brake = true;
 	car.wheels[3].steering = false;
 
-	car.spawnPosition = { 0, 12,10 };
+	car.spawnPosition = { 0, 2,10 };
 
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(car.spawnPosition.x, car.spawnPosition.y, car.spawnPosition.z);
@@ -121,6 +121,8 @@ bool ModulePlayer::Start()
 	carriCoche.num_wheels = 2;
 	carriCoche.wheels = new Wheel[2];
 
+	carriCoche.carriSpawnPosition = { 0, 2, 5};
+
 	carriCoche.wheels[0].connection.Set(half_width - 0.3f * wheel_width, connection_height, 0.0f);
 	carriCoche.wheels[0].direction = direction;
 	carriCoche.wheels[0].axis = axis;
@@ -143,10 +145,10 @@ bool ModulePlayer::Start()
 	carriCoche.wheels[1].brake = false;
 	carriCoche.wheels[1].steering = true;
 	
-	//trolley = App->physics->AddVehicle(carriCoche);
-	//trolley->SetPos(0, 1, 8);
+	trolley = App->physics->AddVehicle(carriCoche);
+	trolley->SetPos(carriCoche.carriSpawnPosition.x, carriCoche.carriSpawnPosition.y, carriCoche.carriSpawnPosition.z);
 
-	//App->physics->AddConstraintP2P(*vehicle, *trolley, vec3(0, -0.6f, -1.6f), vec3(0, 0, 2));
+	App->physics->AddConstraintP2P(*vehicle, *trolley, vec3(0, -0.6f, -1.6f), vec3(0, 0, 2));
 
 	App->camera->vehicleToLook = vehicle;
 
@@ -213,8 +215,8 @@ update_status ModulePlayer::Update(float dt)
 		}
 	}
 
-	if (vehicle->GetKmh() > 80.0) acceleration = -MAX_ACCELERATION;
-	if (vehicle->GetKmh() < -80.0) acceleration = MAX_ACCELERATION;
+	if (vehicle->GetKmh() > 83.0) acceleration = -MAX_ACCELERATION;
+	if (vehicle->GetKmh() < -83.0) acceleration = MAX_ACCELERATION;
 
 	vehicle->ApplyEngineForce(acceleration);
 
@@ -223,11 +225,13 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->Brake(brake);
 
 	vehicle->Render();
-	//trolley->Render();
+	trolley->Render();
 
 	char title[80];
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
 	App->window->SetTitle(title);
+
+	isBoosted = false;
 
 	return UPDATE_CONTINUE;
 }
@@ -273,14 +277,18 @@ void ModulePlayer::RespawnCar()
 
 	App->physics->SetGravity({ GRAVITY.getX(), GRAVITY.getY(), GRAVITY.getZ() });
 	mat4x4 carMatrix;
+	mat4x4 carriCoche;
 	vehicle->GetTransform(&carMatrix);
+	trolley->GetTransform(&carriCoche);
 
 	//Correct position and rotation
 	carMatrix.rotate(0, { 0, 1, 0 });
+	carriCoche.rotate(0, { 0, 1, 0 });
 	if (App->map->checkPointsSpawn[0].isEnabled == false)
 	{
 		LOG("Respawning vehicle");
 		carMatrix.translate(vehicle->info.spawnPosition.x, vehicle->info.spawnPosition.y, vehicle->info.spawnPosition.z);
+		carriCoche.translate(trolley->info.carriSpawnPosition.x, trolley->info.carriSpawnPosition.y, trolley->info.carriSpawnPosition.z);
 	}
 	else
 	{
@@ -304,16 +312,22 @@ void ModulePlayer::RespawnCar()
 
 	//Set corrected transform
 	vehicle->SetTransform(&carMatrix.M[0]);
-
+	trolley->SetTransform(&carriCoche.M[0]);
 	//Correct velocity (set to 0)
 	vehicle->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	trolley->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
 	vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+	trolley->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
 
 	vehicle->rotating = false;
+	trolley->rotating = false;
 	vehicle->currentAngle = 0;
-	//App->camera->cameraOffset = vec3(0.f, 4.f, 0.f);
-	//App->player->speed_bost = false;
-	//lastCheckPoint = nullptr;
+	trolley->currentAngle = 0;
+
+	App->player->one = false;
+	App->player->two = false;
+	App->player->three = false;
+	App->player->gg = false;
 
 	p2List_item<PhysSensor3D*>* item = App->map->map_sensors.getFirst();
 	while (item)
@@ -325,6 +339,6 @@ void ModulePlayer::RespawnCar()
 
 void ModulePlayer::PickBooster()
 {
-	
+	isBoosted = true;
 }
 

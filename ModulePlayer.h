@@ -30,7 +30,7 @@ public:
 
 	float turn;
 	float acceleration;
-	float boostedAcceleration;
+	float boostedAcceleration = 100;
 	float brake;
 	bool laps;
 	int lapsCounter;
@@ -38,4 +38,9 @@ public:
 	bool isBoosted;
 
 	bool gameHasFinished = false;
+
+	bool one = false;
+	bool two = false;
+	bool three = false;
+	bool gg = false;
 };

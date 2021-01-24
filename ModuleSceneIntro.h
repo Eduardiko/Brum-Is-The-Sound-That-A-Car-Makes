@@ -46,6 +46,8 @@ public:
 
 	p2List<Primitive*> map_objects;
 
+
+	
 	//List of sensors
 	//PhysBody3D* finishLine;
 

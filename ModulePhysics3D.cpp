@@ -160,13 +160,13 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					{
 						LOG("lap targeted");
 						App->player->laps = true;
+						break;
 
 					}
-					break;
 					case PhysSensor3D::Type::BOOSTER:
 					{
 						LOG("Player picked booster");
-						
+						App->player->PickBooster();
 						break;
 					}
 
