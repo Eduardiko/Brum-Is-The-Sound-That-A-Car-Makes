@@ -21,6 +21,8 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	VehicleInfo car;
+	boostCounter = 1;
+	boostAceleration = 0;
 
 	// Car properties ----------------------------------------
 	car.chassis_size.Set(2, 1, 4);
@@ -173,8 +175,15 @@ update_status ModulePlayer::Update(float dt)
 {
 	if (isBoosted)
 	{
-		acceleration = boostedAcceleration;
-		//counter
+		boostCounter++;
+
+		boostAceleration = MAX_ACCELERATION * 3;
+
+		if (boostCounter > 200)
+		{
+			isBoosted = false;
+			boostAceleration = 0;
+		}
 	}
 	
 	else
@@ -231,7 +240,7 @@ update_status ModulePlayer::Update(float dt)
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
 	App->window->SetTitle(title);
 
-	isBoosted = false;
+	acceleration = boostAceleration;
 
 	return UPDATE_CONTINUE;
 }

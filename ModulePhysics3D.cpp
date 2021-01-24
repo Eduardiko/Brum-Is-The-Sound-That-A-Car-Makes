@@ -165,8 +165,12 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					}
 					case PhysSensor3D::Type::BOOSTER:
 					{
-						LOG("Player picked booster");
-						App->player->PickBooster();
+						if (App->player->isBoosted == false)
+						{
+							LOG("Player picked booster");
+							App->player->PickBooster();
+						}
+						
 						break;
 					}
 					case PhysSensor3D::Type::REESTART:
@@ -251,6 +255,12 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 		{
 			//Respawn
 			App->player->FinishGame();
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+		{
+			//Respawn
+			App->player->PickBooster();
 		}
 
 		if (debug == true)
